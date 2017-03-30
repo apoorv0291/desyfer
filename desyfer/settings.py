@@ -89,17 +89,26 @@ WSGI_APPLICATION = 'desyfer.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'desyfer',
+#         'USER': 'apoorv2',
+#         'PASSWORD': 'a',
+#         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#         'PORT': '3306',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'desyfer',
-        'USER': 'apoorv2',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'lwc',
+        'USER': 'lwcuser2',
         'PASSWORD': 'a',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
-
 
 
 # Internationalization
