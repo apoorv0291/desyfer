@@ -1,0 +1,16 @@
+<div class="thumbnail text-center">
+    {% if product.get_image_url %}
+        <a href="{{ product.get_absolute_url }}">
+            <img id="img" class="img-responsive" src="{{ product.get_image_url }}">
+        </a>
+    {% endif %}
+    <!--{% for image in product.productimage_set.all %}-->
+    <div class="caption">
+        <h3><a href="{{ product.get_absolute_url }}"> {{product.title}}</a></h3>
+        {% if price == 'True' %}
+            {{ product.variation_set.first.get_html_price | safe }}
+            <!--{{ product.variation_set.first.title }}-->
+        {% endif %}
+    </div>
+    <!--{% endfor %}-->
+</div>

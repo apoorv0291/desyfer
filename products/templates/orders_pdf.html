@@ -1,0 +1,22 @@
+{% extends "easy_pdf/base.html" %}
+
+{% block content %}
+    <div id="content">
+        <h1>Hi there!</h1>
+    </div>
+
+    <div class="row">
+        <h2>Your Orders:</h2>
+        {% for order in orders %}
+            <div class="row">
+                <div class="col-md-6 ">
+                        <!--USer: {{ order.user.username }} <br/>-->
+                        Product:<span class="lead"> {{ order.product.title }}</span> <br>
+                        Price:<span class="lead">{{  order.product.price }}</span><br>
+                        Date:<span class="lead">{{ order.timestamp }}</span><br>
+                        <hr/>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
