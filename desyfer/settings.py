@@ -123,7 +123,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_in_desyfer", "static_root")
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "products", "template"),
+    os.path.join(BASE_DIR, "products", "templates"),
     os.path.join(BASE_DIR, "templates"),
     os.path.join(BASE_DIR, "templates",'registration'),
     #'/var/www/static/',
