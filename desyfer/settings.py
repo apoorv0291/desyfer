@@ -129,7 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_in_desyfer", "static_root")
+STATIC_ROOT = os.path.join(BASE_DIR, "static_in_desyfer", "static_root")
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "products", "templates"),
@@ -139,7 +139,7 @@ STATICFILES_DIRS = (
 )
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_in_desyfer", "media_root")
+MEDIA_ROOT = os.path.join(BASE_DIR, "static_in_desyfer", "media_root")
 
 #DJANGO REGISTRATION REDUX SETTINGS
 ACCOUNT_ACTIVATION_DAYS = 7
