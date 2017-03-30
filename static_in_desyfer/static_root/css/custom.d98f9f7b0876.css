@@ -1,0 +1,16 @@
+.text-align-center {
+	text-align: center;
+}
+
+.og_price {
+
+    color:red;
+    text-decoration:line-through;
+}
+
+.navbar-cart{
+
+    font-size:16px;
+    vertical-align:middle;
+
+}

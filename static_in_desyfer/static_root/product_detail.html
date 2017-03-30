@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="row" style="background-color:rgba(221, 221, 221, 0.45);padding:10px;margin-top:30px;" >
+    <div class="col-md-4" >
+        <h4>Name:{{ object.title }}</h4>
+        <h4>Manufacturer:{{ object.manufacturer }}</h4>
+        <h4>Category:
+            {% for category in object.categories.all %}
+                {{ category.title }}
+            {% endfor %}
+        </h4>
+        <h4>Price:{{ object.price }}</h4>
+    </div>
+    <div class="col-md-4" align="center">
+            {% if object.productimage_set.count > 0 %}
+                {% for image in object.productimage_set.all %}
+                    <img src="{{ image.image.url }}" style="background-size:contain;max-height:100px;">
+                {% endfor %}
+            {%  endif %}
+            {% if object.quantity > 0 %}
+
+            <form action="{% url 'product_buy' pk=object.id %}" method="POST" style="padding:4px;">
+                {% csrf_token %}
+                <input type="hidden" value="{{ request.user.id }}" name="user_id">
+                <!--<input type="hidden" value="{{ request.user.username }}" name="user_id">-->
+                <input type="hidden" value="{{ object.id }}" name="product_id">
+                <!--<input type="hidden" value="{{ object.title }}" name="product_id">-->
+                <button type="submit" class="btn btn-primary" value="Buy">Buy</button>
+
+            </form>
+
+
+        {% else %}
+            <h4 style="color:red">Out Of Stock</h4>
+        {% endif %}
+    </div>
+    <div class="col-md-3">
+        <h4>Share On Social Media</h4>
+        <!--<p>{{ request.get_full_path }}</p>-->
+        <!--<p>{{ request.build_absolute_uri }}</p>-->
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+            <i class="fa fa-facebook-square fa-3x "></i>
+        </a>
+        <a href="https://twitter.com/home?status='{{ request.build_absolute_uri }}'">
+            <i class="fa fa-twitter-square fa-3x "></i>
+        </a>
+    </div>
+</div>
+{% endblock %}
