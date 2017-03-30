@@ -16,15 +16,16 @@
     <hr>
     <div class="row">
         <div class="col-md-7 col-md-offset-3">
-        {%  if qs  %}
-            {% if object_list %}
+            <!--<h4>testing</h4>-->
+            
+            {% if qs and object_list %}
                 <h3>Product:</h3>
                 {% include 'products.html' with object_list=object_list %}
-
-            {% else %}
+            {% endif %}
+            {% if qs and not object_list %}
                 <h4 style="color:red;"> Product Not Found</h4>
             {% endif %}
-        {% endif %}
+
         </div>
     </div>
 

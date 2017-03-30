@@ -24,16 +24,15 @@ class ProductListView(ListView):
         context = super(ProductListView, self).get_context_data(**kwargs)
         q = self.request.GET.get('q')
         if not q:
-            context['qs'] = False
+            context['qs'] = None
             print "context::", context
             return context
         if q:
-            qs = Product.objects.filter(product_code=q)
+            qst = Product.objects.filter(product_code=q)
+            qs = True
 
-        if not len(qs):
-            qs = False
-        else:
-            qs =True
+
+        print "qs::",qs
         context['qs'] = qs
         print "context::", context
 
