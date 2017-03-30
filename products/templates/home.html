@@ -2,27 +2,34 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <form  method="GET" role="search" action='' class="form-inline" style="margin-top:80px;">
-            {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form  method="GET" role="search" action='' class="form-inline" style="margin-top:80px;">
+                {% csrf_token %}
 
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search Products" name="q">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search Products" name="q">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="error_msg col-md-6 col-md-offset-3" style="color:red">
+            <h4>{{ error_msg }}</h4>
+        </div>
     </div>
 </div>
     <hr>
     <div class="row">
         <div class="col-md-7 col-md-offset-3">
             <!--<h4>testing</h4>-->
-            
+
             {% if qs and object_list %}
                 <h3>Product:</h3>
                 {% include 'products.html' with object_list=object_list %}
             {% endif %}
-            {% if qs and not object_list %}
+            {% if not error_msg and qs and not object_list %}
                 <h4 style="color:red;"> Product Not Found</h4>
             {% endif %}
 

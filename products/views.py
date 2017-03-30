@@ -5,7 +5,7 @@ from products.models import Product, OrderCart
 from django.contrib.auth.models import User
 from django.shortcuts import HttpResponse, get_object_or_404, Http404, redirect
 from django.shortcuts import get_object_or_404
-
+from products.utils import check_product_no
 # Create your views here.
 
 
@@ -28,10 +28,11 @@ class ProductListView(ListView):
             print "context::", context
             return context
         if q:
-            qst = Product.objects.filter(product_code=q)
             qs = True
-
-
+            error_msg, boolean = check_product_no(q)
+            print "Error msg, boolean", error_msg, boolean
+            if not boolean:
+                context['error_msg'] = error_msg
         print "qs::",qs
         context['qs'] = qs
         print "context::", context
