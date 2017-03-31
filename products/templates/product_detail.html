@@ -25,13 +25,18 @@
             {%  endif %}
             {% if object.quantity > 0 %}
 
-            <form action="{% url 'product_buy' pk=object.id %}" method="GET" style="padding:4px;">
-                <!--{% csrf_token %}-->
+            <form action="{% url 'product_buy' pk=object.id %}" method="POST" style="padding:4px;">
+                {% csrf_token %}
                 <input type="hidden" value="{{ request.user.id }}" name="user_id">
                 <!--<input type="hidden" value="{{ request.user.username }}" name="user_id">-->
                 <input type="hidden" value="{{ object.id }}" name="product_id">
                 <!--<input type="hidden" value="{{ object.title }}" name="product_id">-->
-                <button type="submit" class="btn btn-primary" value="Buy">Buy</button>
+                {% if request.user.is_authenticated %}
+                    <button type="submit" class="btn btn-primary" value="Buy">Buy</button>
+                {% else %}
+                    <button type="submit" class="btn btn-primary disabled" value="Buy">Buy</button>
+                    <h4 style="color:red">Login To Buy </h4>
+                {% endif %}
 
             </form>
 

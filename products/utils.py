@@ -1,6 +1,7 @@
 
 
 def check_product_no(product_no):
+    print "In Check_PRODUCT_NO"
     try:
         product_no = int(product_no.strip())
         if product_no <9999999 or  product_no > 99999999:
@@ -11,6 +12,7 @@ def check_product_no(product_no):
     except Exception, e:
         print e
         error_msg = "Product Code Should be an integer not a String"
+        print "error_msg", error_msg
         return error_msg, False
 
 

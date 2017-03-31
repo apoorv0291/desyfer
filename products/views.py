@@ -59,7 +59,10 @@ class ProductListView( ListView ):
         qs = None
         if q:
             q = q.strip()
-            qs = Product.objects.filter(product_code=q)
+            print "After Strip"
+            error_msg, boolean = check_product_no(q)
+            if boolean:
+                qs = Product.objects.filter(product_code=q)
         return qs
 
 class ProductDetailView(DetailView):
@@ -113,21 +116,22 @@ class OrderCartDetailView(DetailView):
     model = OrderCart
     template_name = 'ordercart_detail.html'
 
-    # @method_decorator(login_required)
-    # def post(self, request, *args, **kwargs):
-    #     if request.user.is_authenticated():
-    #         print "In Post of OderCartDetailView...."
-    #         print "request.POST", request.POST
-    #         user_id = request.POST.get('user_id')
-    #         product_id = request.POST.get('product_id')
-    #         product = Product.objects.get(id=product_id)
-    #         user = User.objects.get(id=user_id)
-    #         order_cart = OrderCart(user=user, product=product)
-    #         order_cart.save()
-    #         print "Order Saved!!!"
-    #         return redirect('orders_list')
-    #     else:
-    #         return HttpResponse("Please Login First")
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            print "In Post of OderCartDetailView...."
+            print "request.POST", request.POST
+            user_id = request.POST.get('user_id')
+            product_id = request.POST.get('product_id')
+            product = Product.objects.get(id=product_id)
+            user = User.objects.get(id=user_id)
+            order_cart = OrderCart(user=user, product=product)
+            order_cart.save()
+            print "Order Saved!!!"
+            return redirect('orders_list')
+        else:
+            return HttpResponse("Please Login First")
+
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated():
