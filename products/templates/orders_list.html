@@ -14,16 +14,19 @@
         <h4><a href="{% url 'pdf_view' %}" target="_blank">Generate pdf</a></h4>
     </div>
 </div>
+{% if object_list %}
 {% for order in object_list %}
     <div class="row">
         <div class="col-md-6 " style="background-color:rgba(221, 221, 221, 0.45);padding:10px;margin:5px;">
             <!--USer: {{ order.user.username }} <br/>-->
             <h4>Product: {{ order.product.title }}</h4>
-            <h4>Price: {{  order.product.price }}</h4>
+            <h4>Price: <i class="fa fa-inr"></i>{{  order.product.price }}</h4>
             <h4>Date:{{ order.timestamp }}</h4>
 
         </div>
     </div>
 {% endfor %}
-
+{% else %}
+    <h4>No Orders.</h4>
+{% endif %}
 {% endblock %}
