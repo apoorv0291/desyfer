@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import HttpResponse, get_object_or_404, Http404, redirect
 from django.shortcuts import get_object_or_404
 from products.utils import check_product_no
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 # Create your views here.
 
 
@@ -13,9 +15,19 @@ from products.utils import check_product_no
 #
 #     template_name = 'home.html'
 #     return render(request,template_name)
+class LoginRequiredMixin(object):
+	@classmethod
+	def as_view(self, *args, **kwargs):
+		view = super(LoginRequiredMixin, self).as_view(*args, **kwargs)
+		return login_required(view)
+
+	@method_decorator(login_required)
+	def dispatch(self, request, *args, **kwargs):
+		return super(LoginRequiredMixin, self).dispatch(request, *args, **kwargs)
 
 
-class ProductListView(ListView):
+
+class ProductListView( ListView ):
     model = Product
     template_name = 'home.html'
 
@@ -64,30 +76,75 @@ class OrderCartListView(ListView):
     model = OrderCart
     template_name = "orders_list.html"
 
+    # @method_decorator(login_required)
     def get_queryset(self, *args, **kwargs):
-        print "in Oder::getqueryset"
+        print "in Order::getqueryset"
         user_id = self.request.user.id
         qs = OrderCart.objects.filter(user__id = user_id).order_by('-timestamp')
         return qs
 
+    # @method_decorator(login_required)
+    # def post(self, request, *args, **kwargs):
+    #     if request.user.is_authenticated():
+    #         print "In Post of OderListlView...."
+    #         print "request.POST", request.POST
+    #         user_id = request.POST.get('user_id')
+    #         product_id = request.POST.get('product_id')
+    #         product = Product.objects.get(id=product_id)
+    #         user = User.objects.get(id=user_id)
+    #         order_cart = OrderCart(user=user, product=product)
+    #         order_cart.save()
+    #         print "Order Saved!!!"
+    #         return redirect('orders_list')
+    #     else:
+    #         return HttpResponse("Please Login First")
+
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        print "In GET of ordercart listview"
+        if request.user.is_authenticated():
+            print "In GET of OderListlView...."
+            print "request.GET", request.GET
+            return super(OrderCartListView, self).get(request, *args, **kwargs)
+        else:
+            return HttpResponse("Please Login First")
+
 class OrderCartDetailView(DetailView):
     model = OrderCart
+    template_name = 'ordercart_detail.html'
 
-
-
-    def post(self, request, *args, **kwargs):
+    # @method_decorator(login_required)
+    # def post(self, request, *args, **kwargs):
+    #     if request.user.is_authenticated():
+    #         print "In Post of OderCartDetailView...."
+    #         print "request.POST", request.POST
+    #         user_id = request.POST.get('user_id')
+    #         product_id = request.POST.get('product_id')
+    #         product = Product.objects.get(id=product_id)
+    #         user = User.objects.get(id=user_id)
+    #         order_cart = OrderCart(user=user, product=product)
+    #         order_cart.save()
+    #         print "Order Saved!!!"
+    #         return redirect('orders_list')
+    #     else:
+    #         return HttpResponse("Please Login First")
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
         if request.user.is_authenticated():
-            print "In Post of OderCartDetailView"
-            print "request.POST", request.POST
-            user_id = request.POST.get('user_id')
-            product_id = request.POST.get('product_id')
+            print "In GET of OrderDetailView...."
+            print "request.GET", request.GET
+            user_id = request.user.id
+            product_id = request.GET.get('product_id')
+            print "product_id::", product_id
             product = Product.objects.get(id=product_id)
             user = User.objects.get(id=user_id)
             order_cart = OrderCart(user=user, product=product)
             order_cart.save()
+            print "Order Saved!!!"
             return redirect('orders_list')
         else:
             return HttpResponse("Please Login First")
+
 
 
 from easy_pdf.views import PDFTemplateView

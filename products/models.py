@@ -45,7 +45,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=120)
-    product_code = models.DecimalField(max_digits=8, decimal_places=0)
+    product_code = models.IntegerField()
     manufacturer = models.CharField(max_length=50,blank=True, null=True)
     price = models.DecimalField(decimal_places=2, max_digits=20)
     # active = models.BooleanField(default=True)

@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% block head_title %}
+    {{ block.super }} | Product
+{% endblock %}
 
 {% block content %}
 
@@ -22,8 +25,8 @@
             {%  endif %}
             {% if object.quantity > 0 %}
 
-            <form action="{% url 'product_buy' pk=object.id %}" method="POST" style="padding:4px;">
-                {% csrf_token %}
+            <form action="{% url 'product_buy' pk=object.id %}" method="GET" style="padding:4px;">
+                <!--{% csrf_token %}-->
                 <input type="hidden" value="{{ request.user.id }}" name="user_id">
                 <!--<input type="hidden" value="{{ request.user.username }}" name="user_id">-->
                 <input type="hidden" value="{{ object.id }}" name="product_id">

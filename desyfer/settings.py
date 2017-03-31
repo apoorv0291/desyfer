@@ -63,7 +63,7 @@ ROOT_URLCONF = 'desyfer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,7 +137,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "templates",'registration'),
     #'/var/www/static/',
 )
-
+print "STATICFILES_DIRS::", STATICFILES_DIRS
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "static_in_desyfer", "media_root")
 

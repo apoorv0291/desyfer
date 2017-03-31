@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Your Order:</h2>
+    </div>
+    <div class="col-md-4">
+        <!--<h4><a href="{% url 'pdf_view' %}">Generate pdf</a></h4>-->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 " style="background-color:rgba(221, 221, 221, 0.45);padding:10px;margin:5px;">
+        <h4>USer: {{ object.user.username }} </h4>
+        <h4>Product: {{ object.product.title }}</h4>
+        <h4>Price: {{  object.product.price }}</h4>
+        <h4>Date:{{ object.timestamp }}</h4>
+
+    </div>
+</div>
+
+
+{% endblock %}

@@ -8,7 +8,8 @@ from products.views import ProductListView, ProductDetailView, OrderCartDetailVi
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^buy/(?P<pk>\d+)/$', OrderCartDetailView.as_view(), name='product_buy'),
+    # url(r'^buy/(?P<pk>\d+)/$', OrderCartDetailView.as_view(), name='product_buy'),
+    url(r'^buy/(?P<pk>\d+)$', OrderCartDetailView.as_view(), name='product_buy'),
     url(r'^orders/$', OrderCartListView.as_view(), name='orders_list'),
     url(r'^(?P<pk>\d+)/$', ProductDetailView.as_view(), name='product_detail'),
     url(r'^pdf/$',HelloPDFView.as_view(), name='pdf_view'),
