@@ -16,7 +16,7 @@
         <li><a href="{% url 'orders_list' %}">Orders</a></li>
         {% if request.user.is_authenticated %}
           <li><a href="{% url 'auth_logout' %}">Logout</a></li>
-          <li><a>{{ request.user.username }}</a></li>
+
         {% else %}
           <li><a href="{% url 'registration_register' %}">Register</a></li>
           <li><a href="{% url 'auth_login' %}"  role="button" aria-expanded="false">Login </a></li>

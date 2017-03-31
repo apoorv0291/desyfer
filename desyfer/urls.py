@@ -17,11 +17,13 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from products.views import ProductListView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^products/',include('products.urls'))
+    url(r'^products/',include('products.urls')),
+    url(r'^$', ProductListView.as_view(), name='products_list'),
 ]
 
 if settings.DEBUG:

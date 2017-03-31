@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'apoorv0291@gmail.com'
+EMAIL_HOST_USER = 'apoorvcool2009@gmail.com'
 EMAIL_HOST_PASSWORD = 'dellstudio1555'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
